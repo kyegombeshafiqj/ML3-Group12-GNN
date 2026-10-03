@@ -1,0 +1,172 @@
+# Week1 contribution
+
+Member: MABANDA ERIYA NESTA 25/U/24151
+
+Programme: Bachelor of Science in Electrical Engineering (BELE)
+
+Project: Machine Learning 3 - Graph Neural Network from scratch
+
+Group: 12
+
+Week: 1
+
+Task: Training and Backpropagation
+
+## 1. What is Training in a GNN?
+
+Training is the process through which a Graph Neural Network (GNN) learns to make better predictions by adjusting its parameters based on the errors it makes.
+
+For a node classification problem, the GNN receives the graph structure, node features and the known labels of some nodes. The model performs forward propagation to produce predictions for the nodes. These predictions are then compared with the actual labels using a loss function.
+
+The loss function measures how different the predicted values are from the actual values. A high loss means that the predictions are far from the correct answers, while a low loss means that the predictions are closer to the correct answers.
+
+The main training process can therefore be summarized as:
+
+Forward Propagation → Loss Calculation → Backpropagation → Weight Update → Repeat
+
+This process is repeated for several training iterations or epochs so that the GNN can gradually improve its predictions.
+
+## 2. Loss Function
+
+A loss function is used to measure the error made by the GNN during prediction. For a node classification problem, cross-entropy loss is commonly used because the model produces probabilities for different classes.
+
+For a binary classification problem, the Binary Cross-Entropy (BCE) loss for one node can be written as:
+
+$$
+L = -[y\log(p)+(1-y)\log(1-p)]
+$$
+
+Where:
+
+* y is the actual label.
+* p is the predicted probability.
+* L is the loss.
+
+For example, if the actual label is:
+
+$$
+y=1
+$$
+
+and the model predicts:
+
+$$
+p=0.8
+$$
+
+then:
+
+$$
+L=-\log(0.8)
+$$
+
+$$
+L\approx0.223
+$$
+
+This is a relatively small loss because the prediction of 0.8 is close to the correct label of 1.
+
+## 3. What is Backpropagation?
+
+Backpropagation is the process used to determine how the weights of the neural network should be changed to reduce the loss.
+
+After the GNN produces its predictions and calculates the loss, backpropagation works backwards through the network. It calculates the gradient of the loss with respect to each weight.
+
+The gradient shows how much a particular weight contributes to the error. The model can then use this information to determine the direction in which the weights should be changed.
+
+In a GNN, this process must take into account the graph structure because the representation of a node depends not only on its own features but also on information received from its neighboring nodes during message passing.
+
+Therefore, the error can be propagated backwards through the operations used to update the node representations.
+
+## 4. Weight Update Using Gradient Descent
+
+Once the gradients have been calculated through backpropagation, the weights are updated using an optimization method such as gradient descent.
+
+The basic weight update equation is:
+
+$$
+W_{\text{new}}=W_{\text{old}}-\eta\frac{\partial L}{\partial W}
+$$
+
+Where:
+
+* Wnew is the updated weight.
+* Wold is the current weight.
+* η is the learning rate.
+* L is the loss function.
+* ∂L/∂W is the gradient of the loss with respect to the weight.
+
+The learning rate controls how large the weight update is. A large learning rate produces larger changes, while a small learning rate produces smaller changes.
+
+### Example
+
+Suppose the current weight is:
+
+$$
+W_{\text{old}}=0.5
+$$
+
+The learning rate is:
+
+$$
+\eta=0.1
+$$
+
+and the calculated gradient is:
+
+$$
+\frac{\partial L}{\partial W}=0.4
+$$
+
+Using gradient descent:
+
+$$
+W_{\text{new}}=0.5-(0.1)(0.4)
+$$
+
+$$
+W_{\text{new}}=0.5-0.04
+$$
+
+$$
+W_{\text{new}}=0.46
+$$
+
+The weight has therefore been changed from 0.5 to 0.46 in an attempt to reduce the loss.
+
+## 5. Training Process in a GNN
+
+The training of the GNN can be viewed as a repeated sequence of steps:
+
+1. Input: The graph, node features and available node labels are provided to the model.
+2. Forward propagation: The GNN performs message passing and produces node representations and predictions.
+3. Loss calculation: The predictions are compared with the actual labels using a loss function.
+4. Backpropagation: The gradients of the loss with respect to the model parameters are calculated.
+5. Weight update: The weights are updated using gradient descent or another optimization method.
+6. Repeat: The process is repeated for multiple epochs until the model learns useful representations and improves its predictions.
+
+In simple terms:
+
+The GNN makes a prediction → measures its error → works backwards to find what caused the error → adjusts its weights → makes another prediction.
+
+## 6. Importance of Training and Backpropagation in Node Classification
+
+Training and backpropagation are important because they allow the GNN to learn the relationship between node features, neighboring nodes and their labels.
+
+For example, if a GNN is being used to classify research papers, the model can learn from the features of each paper and the connections between papers. If its prediction is incorrect, backpropagation helps adjust the model parameters so that similar errors are less likely to occur during later training iterations.
+
+Therefore, training enables the GNN to learn from the available data, while backpropagation provides the mechanism for calculating how the model parameters should be adjusted.
+
+## Sources
+
+1. Hamilton, W. L. Graph Representation Learning — Chapter 5: Graph Neural Networks.
+
+   https://www.cs.mcgill.ca/~wlh/grl_book/files/GRL_Book-Chapter_5-GNNs.pdf
+
+2. Stanford University. CS224W: Machine Learning with Graphs.
+
+   https://web.stanford.edu/class/cs224w/
+
+3. Goodfellow, I., Bengio, Y., & Courville, A. Deep Learning — Chapter 6: Deep Feedforward Networks.
+
+   https://www.deeplearningbook.org/
